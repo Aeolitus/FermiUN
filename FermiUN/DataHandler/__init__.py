@@ -5,7 +5,7 @@ class DataHandler(object):
     from ._crop_and_copy_from_folder import crop_and_copy_from_folder
     from ._make_train_validation_test_split import make_train_validation_test_split
     from ._create_batch import create_batch
-    from ._generate_mask import generate_mask
      
-    def __init__(self, conf):
+    def __init__(self, conf, mask):
         self.config = conf
+        self.mask = mask

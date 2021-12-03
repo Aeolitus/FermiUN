@@ -6,5 +6,6 @@ class ModelHandler(object):
     from ._init_model import init_model
     from ._train_model import train_model
     
-    def __init__(self, conf):
+    def __init__(self, conf, mask):
         self.config = conf
+        self.mask = mask

@@ -2,10 +2,12 @@ from munch import Munch
 from FermiUN.ModelHandler import ModelHandler
 from FermiUN.DataHandler import DataHandler
 import yaml 
+import numpy as np
 
 class FermiUN(object):
     # Import Methods from Files
     from ._create_config_file import create_config_file
+    
     # TODO: Add plotting methods
     # One for plotting the current loss curve that is called during training after an epoch
     # One for plotting a nice summary over the trained model with some example images and performance
@@ -16,8 +18,9 @@ class FermiUN(object):
         self.config = None
         self.load_config_file(configpath)
         self.configpath = "configpath"
-        self.modelhandler = ModelHandler(self.config)
-        self.datahandler = DataHandler(self.config)
+        self.mask = self.generate_mask()
+        self.modelhandler = ModelHandler(self.config, self.mask)
+        self.datahandler = DataHandler(self.config, self.mask)
 
     @classmethod
     def from_saved_model(cls, modelpath : str, configpath : str):
@@ -85,4 +88,17 @@ class FermiUN(object):
             for path in folderpath:
                 self.datahandler.crop_and_copy_from_folder(path, imagename)
 
+    def generate_mask(self) -> np.array:
+        '''
+        Creates a binary mask as defined in the config file with the central area zeroed out.
+        :return mask: The two-dimensional np.array with the same size as the images. 
+        '''
+        scale = np.arange(self.config.image.width)
+        mask = np.zeros((self.config.image.width, self.config.image.width))
+        
+        mask[(scale[np.newaxis, :] - (self.config.image.width - 1) / 2) ** 2 \
+            + (scale[:, np.newaxis] - (self.config.image.width - 1) / 2) ** 2 \
+            > self.config.image.radius ** 2] = 1
+
+        return mask
     
