@@ -1,7 +1,6 @@
 import numpy as np
 from skimage.io import imread
 
-# TODO: Could be rewritten to automatically load from the imagefolder? 
 def create_batch(self, list_of_files : list[str], list_of_indices : list[int]) -> tuple[np.array, np.array]:
     '''
     Creates a batch of masked images and associated targets.
