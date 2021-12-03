@@ -1,4 +1,6 @@
 from munch import Munch
+from FermiUN.ModelHandler import ModelHandler
+from FermiUN.DataHandler import DataHandler
 import yaml 
 
 class FermiUN(object):
@@ -10,12 +12,12 @@ class FermiUN(object):
     # TODO: Inference functions that take a single image or a batch and predict the central area
     # These should likely just save the resulting predicted image in a format defined in the config.
     
-    # Default constructor, will likely disable later
-    def __init__(self):
+    def __init__(self, configpath : str):
         self.config = None
-        self.configpath = ""
-        self.modelhandler = None
-        self.datahandler = None
+        self.load_config_file(configpath)
+        self.configpath = "configpath"
+        self.modelhandler = ModelHandler(self.config)
+        self.datahandler = DataHandler(self.config)
 
     @classmethod
     def from_saved_model(cls, modelpath : str, configpath : str):

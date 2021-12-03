@@ -1,7 +1,8 @@
 batch_size: 8
 image:
-    center_x: 100
-    center_y: 100
+    center_x: 225
+    center_y: 200
+    max_value: 1500.0
     width: 200
 imagefolder: L:/FermiUN_TrainingData
 imageprefix: bright_
