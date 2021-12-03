@@ -1,0 +1,15 @@
+batch_size: 8
+image:
+    center_x: 100
+    center_y: 100
+    width: 200
+imagefolder: ''
+learning_rate: 5.0e-06
+max_epochs: 1000
+model_path: ''
+radius: 50
+test_fraction: 0.1
+testlist: []
+trainlist: []
+validation_fraction: 0.2
+validationlist: []
