@@ -36,6 +36,7 @@ class FermiUN(object):
         obj.load_config_file(configpath)
         return obj
 
+    # Is this kind of class constructor a good idea?
     @classmethod
     def autotrain(cls, folderpath : str, configpath : str):
         '''
@@ -54,5 +55,19 @@ class FermiUN(object):
             file_content = conf_file.read()
             self.config = Munch.fromYAML(file_content)
             self.configpath = path
+
+    def save_config_file_as(self, path : str):
+        '''
+        Save the config file to a new location.
+        :param path: Filepath of the config file to save into
+        '''
+        with open(path, "w") as conf_file:
+            conf_file.write(self.config.toYAML())
+
+    def save_config_file(self):
+        '''
+        Save changes to the current config file.
+        '''
+        self.save_config_file_as(self.configpath)
 
     
