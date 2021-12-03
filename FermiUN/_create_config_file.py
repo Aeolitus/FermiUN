@@ -1,7 +1,8 @@
 from munch import Munch
 import yaml
 
-def create_config_file(self, path : str):
+@classmethod
+def create_config_file(cls, path : str):
     conf = Munch() # Dict with dot notation for readability
     # TODO: Replace default values
     conf.image = Munch()
@@ -9,7 +10,8 @@ def create_config_file(self, path : str):
     conf.image.center_x = 100
     conf.image.center_y = 100
     conf.radius = 50
-    conf.imagefolder = ""
+    conf.imagefolder = "L:/FermiUN_TrainingData"
+    conf.imageprefix = "bright_"
     conf.testlist = []
     conf.trainlist = []
     conf.validationlist = []

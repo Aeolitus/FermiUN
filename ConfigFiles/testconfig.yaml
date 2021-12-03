@@ -3,7 +3,8 @@ image:
     center_x: 100
     center_y: 100
     width: 200
-imagefolder: ''
+imagefolder: L:/FermiUN_TrainingData
+imageprefix: bright_
 learning_rate: 5.0e-06
 max_epochs: 1000
 model_path: ''
