@@ -72,4 +72,17 @@ class FermiUN(object):
         '''
         self.save_config_file_as(self.configpath)
 
+    def import_images(self, folderpath : str, imagename : str):
+        '''
+        Import, crop and rescale images from a folder.
+        :param folderpath: Folder from which images are imported. Can be a list of folders.
+        :param imagename: Name of the images (must appear in the filename)
+        '''
+        print("Importing images into the imagefolder...")
+        if isinstance(folderpath, str):
+            self.datahandler.crop_and_copy_from_folder(folderpath, imagename)
+        else:
+            for path in folderpath:
+                self.datahandler.crop_and_copy_from_folder(path, imagename)
+
     

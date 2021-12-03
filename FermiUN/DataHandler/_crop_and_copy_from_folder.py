@@ -1,5 +1,5 @@
-from os import listdir
-from os.path import join, isfile, exists, mkdir
+from os import listdir, mkdir
+from os.path import join, exists
 import numpy as np
 from skimage.io import imread
 from tqdm import tqdm
@@ -24,9 +24,9 @@ def crop_and_copy_from_folder(self, folderpath : str, imagename : str):
     if top < 0 or left < 0:
         raise Exception("Crop window exceeds image bounds.")
 
-    img_list = [join(folderpath, el) for el in listdir(folderpath) if 'BrightM' in el]
-    img_number = len(listdir(target_folder))
-
+    img_list = [join(folderpath, el) for el in listdir(folderpath) if imagename in el]
+    old_img_number = len(listdir(target_folder))
+    img_number = old_img_number
     for img in tqdm(img_list):
         img = imread(img)
         img = img[top : top + self.config.image.width, \
@@ -41,3 +41,4 @@ def crop_and_copy_from_folder(self, folderpath : str, imagename : str):
         target_name = target_folder + '/' + self.config.imageprefix + str(img_number)
         np.save(target_name, img)
         img_number = img_number + 1
+    print(f"{img_number-old_img_number} images were imported, for a total of {img_number}.")
