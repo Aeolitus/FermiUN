@@ -1,7 +1,7 @@
 # %%
-from FermiUN import FermiUN
-f = FermiUN.from_configfile("./ConfigFiles/testconfig.yaml")
-print(f.config)
+#from FermiUN import FermiUN
+#f = FermiUN.from_configfile("./ConfigFiles/testconfig.yaml")
+#print(f.config)
 # %%
 from os import listdir
 from os.path import join, isfile, abspath
