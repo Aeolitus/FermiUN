@@ -46,9 +46,12 @@ def crop_and_copy_from_folder(self, folderpath : str, imagename : str):
     img_number = old_img_number
 
     for img in tqdm(img_list):
-        img = self.read_crop_and_cap(img)
-        target_name = target_folder + '/' + self.config.imageprefix + str(img_number)
-        np.save(target_name, img)
-        img_number = img_number + 1
+        try:
+            img = self.read_crop_and_cap(img)
+            target_name = target_folder + '/' + self.config.imageprefix + str(img_number)
+            np.save(target_name, img)
+            img_number = img_number + 1
+        except Exception: 
+            pass
     
     print(f"{img_number-old_img_number} images were imported, for a total of {img_number}.")
