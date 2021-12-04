@@ -42,9 +42,9 @@ def crop_and_copy_from_folder(self, folderpath : str, imagename : str):
     img_list = [join(folderpath, el) for el in listdir(folderpath) if imagename in el]
     old_img_number = len(listdir(target_folder))
     img_number = old_img_number
-    
+
     for img in tqdm(img_list):
-        img = read_crop_and_cap(img)
+        img = self.read_crop_and_cap(img)
         target_name = target_folder + '/' + self.config.imageprefix + str(img_number)
         np.save(target_name, img)
         img_number = img_number + 1
