@@ -14,11 +14,10 @@ def read_crop_and_cap(self, imagepath : str) -> np.array:
     img = img[top : top + self.config.image.width, \
         left : left + self.config.image.width]
 
-    # Rescale and cut of outliers
-    # TODO: This should probably be automatically determined from the images
-    img = img / self.config.image.max_value
-    img[img > 1.0] = 1.0 # TODO: Should this be somehow marked as an outlier?
-    img[img < 0.0] = 0
+    # Rescale and cut of outliers - 4x the average seems pretty reasonable
+    img = img / (4 * np.average(img)) 
+    img[img > 1.0] = 1.0   # Sometimes there are hot pixels that need to be cut
+    img[img < 0.0] = 0.0   # Should never occur, cant count negative numbers of photons
 
     return img
 

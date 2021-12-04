@@ -103,7 +103,7 @@ class FermiUN(object):
         
         mask[(scale[np.newaxis, :] - (self.config.image.width - 1) / 2) ** 2 \
             + (scale[:, np.newaxis] - (self.config.image.width - 1) / 2) ** 2 \
-            > self.config.image.radius ** 2] = 1
+            > self.config.radius ** 2] = 1
 
         return mask
 
