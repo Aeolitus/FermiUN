@@ -122,4 +122,19 @@ class FermiUN(object):
         :param modelpath: Filepath to the saved model
         '''
         self.modelhandler.model = load_model(modelpath)
+
+    def initialize_for_training(self):
+        '''
+        Initializes a model from scratch.
+        '''
+        self.save_config_file()
+        self.datahandler.make_train_validation_test_split()
+        self.modelhandler.init_model()
+
+    def train(self):
+        '''
+        Trains the model on the data stored in the imagefolder.
+        '''
+        self.modelhandler.train_model()
+        
     
