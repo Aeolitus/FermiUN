@@ -4,7 +4,6 @@ class DataHandler(object):
     # Import Methods from Files
     from ._crop_and_copy_from_folder import crop_and_copy_from_folder
     from ._make_train_validation_test_split import make_train_validation_test_split
-    from ._create_batch import create_batch
      
     def __init__(self, conf, mask):
         self.config = conf
