@@ -20,3 +20,6 @@ folders = [r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Thermo_Remeasu
 # TODO: Fix the placeholders in the config file, make a real one.
 f = FermiUN("./ConfigFiles/testconfig.yaml")
 #f.import_images(folders, "BrightM")
+
+#f.initialize_for_training()
+#f.train()
