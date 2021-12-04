@@ -1,10 +1,10 @@
 import numpy as np
-from keras.backend import concatenate
-from keras.layers import Input, Conv2D, MaxPooling2D, Conv2DTranspose
-from keras.layers import BatchNormalization, Reshape, ReLU
-from keras.layers import Cropping2D,SeparableConv2D
-from keras.layers.merge import concatenate
-from keras.models import Model
+from tensorflow.keras.backend import concatenate
+from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Conv2DTranspose
+from tensorflow.keras.layers import BatchNormalization, Reshape, ReLU
+from tensorflow.keras.layers import Cropping2D,SeparableConv2D
+from tensorflow.keras.layers import concatenate
+from tensorflow.keras.models import Model
 
 def define_model(self):
     '''

@@ -1,11 +1,12 @@
-from os import listdir
-from os.path import isfile
-
+from tensorflow.keras import backend
+from tensorflow.keras.optimizers import Adam
 
 def init_model(self):
     '''
-    If this folder was already trained on, a model was saved. 
-    This method loads the model to continue where it left off.
-    It is not currently in use.
+    Set up the model from scratch.
     '''
-    pass
+    backend.clear_session()
+    self.model = self.define_model()
+    self.model.summary()
+    opt = Adam(lr=self.config.learning_rate)
+    self.model.compile(optimizer=opt, loss='mse')
