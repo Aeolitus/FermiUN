@@ -15,7 +15,10 @@ def read_crop_and_cap(self, imagepath : str) -> np.array:
         left : left + self.config.image.width]
 
     # Rescale and cut of outliers - 4x the average seems pretty reasonable
-    img = img / (4 * np.average(img)) 
+    magnitude = (4 * np.average(img))
+    if magnitude < 400:
+        print(f"Found an image with no light on bright - Path: {imagepath}")
+    img = img / magnitude 
     img[img > 1.0] = 1.0   # Sometimes there are hot pixels that need to be cut
     img[img < 0.0] = 0.0   # Should never occur, cant count negative numbers of photons
 
