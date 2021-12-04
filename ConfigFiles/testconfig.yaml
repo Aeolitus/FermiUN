@@ -1,15 +1,15 @@
 batch_size: 8
 image:
-    center_x: 225
-    center_y: 200
-    max_value: 1500.0
-    width: 200
+    center_x: 288
+    center_y: 249
+    max_value: 1300.0 # Checked on the 106A 20210125 Dataset (actual max is 1230, small standard deviation)
+    width: 360 # Larger window, contains full data plus a good amount
 imagefolder: L:/FermiUN_TrainingData
 imageprefix: bright_
 learning_rate: 5.0e-06
 max_epochs: 1000
 model_path: ''
-radius: 50
+radius: 120
 test_fraction: 0.1
 testlist: []
 trainlist: []
