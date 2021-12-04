@@ -9,7 +9,6 @@ def create_config_file(cls, path : str):
     conf.image.width = 200
     conf.image.center_x = 225
     conf.image.center_y = 200
-    conf.image.max_value = 1500.0
     conf.radius = 50
     conf.imagefolder = "L:/FermiUN_TrainingData"
     conf.imageprefix = "bright_"

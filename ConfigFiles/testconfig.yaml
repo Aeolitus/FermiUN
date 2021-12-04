@@ -2,7 +2,6 @@ batch_size: 8
 image:
     center_x: 288
     center_y: 249
-    max_value: 1300.0 # Checked on the 106A 20210125 Dataset (actual max is 1230, small standard deviation)
     width: 360 # Larger window, contains full data plus a good amount
 imagefolder: L:/FermiUN_TrainingData
 imageprefix: bright_
