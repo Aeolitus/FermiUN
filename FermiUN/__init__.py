@@ -4,16 +4,11 @@ from FermiUN.DataHandler import DataHandler
 import yaml 
 import numpy as np
 from tensorflow.keras.models import load_model
+from os.path import join
 
 class FermiUN(object):
     # Import Methods from Files
     from ._create_config_file import create_config_file
-    
-    # TODO: Add plotting methods
-    # One for plotting the current loss curve that is called during training after an epoch
-    # One for plotting a nice summary over the trained model with some example images and performance
-    # TODO: Inference functions that take a single image or a batch and predict the central area
-    # These should likely just save the resulting predicted image in a format defined in the config.
     
     def __init__(self, configpath : str):
         self.config = None
@@ -30,7 +25,9 @@ class FermiUN(object):
         :param modelpath: Filepath of the saved model
         :param configpath: Filepath of the config file
         '''
-        pass
+        obj = cls.from_configfile(configpath)
+        obj.load_model(modelpath)
+        return obj
 
     @classmethod
     def from_configfile(cls, configpath : str):
@@ -44,13 +41,16 @@ class FermiUN(object):
 
     # Is this kind of class constructor a good idea?
     @classmethod
-    def autotrain(cls, folderpath : str, configpath : str):
+    def autotrain(cls, configpath : str):
         '''
         Sets up and trains a model automatically.
-        :param folderpath: Filepath of the folder with cropped training data
         :param configpath: Filepath of the config file
         '''
-        pass
+        obj = cls()
+        obj.load_config_file(configpath)
+        obj.initialize_for_training()
+        obj.train()
+        return obj
 
     def load_config_file(self, path : str):
         '''
@@ -127,8 +127,8 @@ class FermiUN(object):
         '''
         Initializes a model from scratch.
         '''
-        self.save_config_file()
         self.datahandler.make_train_validation_test_split()
+        self.save_config_file_as(join(self.config.imagefolder, "config.yaml"))
         self.modelhandler.init_model()
 
     def train(self):
