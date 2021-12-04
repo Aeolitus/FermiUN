@@ -1,4 +1,5 @@
 from FermiUN import FermiUN
+import os
 
 folders = [r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Thermo_Remeasure', \
     r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Thermo_Heating', \
@@ -31,8 +32,12 @@ folders = [r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Thermo_Remeasu
     r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Scan_Re_Uni']
     
 
-
 f = FermiUN("./ConfigFiles/testconfig.yaml")
+
+files = os.listdir(f.config.imagefolder)
+for file in files:
+    os.remove(os.join(f.config.imagefolder, file))
+
 f.import_images(folders, "BrightM")
 
 #f.initialize_for_training()
