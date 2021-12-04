@@ -9,3 +9,7 @@ class ModelHandler(object):
     def __init__(self, conf, mask):
         self.config = conf
         self.mask = mask
+
+        self.epoch = 1
+        self.training_loss = []
+        self.validation_loss = []

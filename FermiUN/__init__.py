@@ -105,4 +105,12 @@ class FermiUN(object):
             > self.config.image.radius ** 2] = 1
 
         return mask
+
+    # TODO
+    def save_model(self):
+        pass
+
+    # TODO
+    def load_model(self, modelpath : str):
+        pass
     
