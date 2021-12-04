@@ -38,13 +38,14 @@ def train_model(self):
         self.training_loss = np.append(self.training_loss, current_training_loss)
         self.validation_loss = np.append(self.validation_loss, current_validation_loss)
 
-        # TODO: Plot the loss curve
+        # Update loss curve plot
+        self.plot_loss_curve()
 
         # Save the current state of the model 
         self.model.save(join(self.config.imagefolder, "model_e" + str(self.epoch) + ".h5"))
         np.save(join(self.config.imagefolder, 'model_training_loss.npy'), self.training_loss)
         np.save(join(self.config.imagefolder, 'model_validation_loss.npy'), self.validation_loss)
-        
+
         gc.collect() # Is this neccessary?
 
         self.epoch = self.epoch + 1

@@ -6,6 +6,7 @@ class ModelHandler(object):
     from ._init_model import init_model
     from ._train_model import train_model
     from ._create_batch import create_batch
+    from ._plotting import plot_loss_curve
     
     def __init__(self, conf, mask):
         self.config = conf
