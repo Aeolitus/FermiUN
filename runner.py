@@ -1,5 +1,8 @@
 from FermiUN import FermiUN
 import os
+import time
+
+starttime = time.time()
 
 folders = [r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Thermo_Remeasure', \
     r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Thermo_Heating', \
@@ -42,3 +45,7 @@ f.import_images(folders, "BrightM")
 
 #f.initialize_for_training()
 #f.train()
+
+endtime = time.time()
+
+print(f"--- Total execution time: {endtime - starttime} seconds ---")
