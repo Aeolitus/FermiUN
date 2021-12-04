@@ -3,6 +3,7 @@ from FermiUN.ModelHandler import ModelHandler
 from FermiUN.DataHandler import DataHandler
 import yaml 
 import numpy as np
+from tensorflow.keras.models import load_model
 
 class FermiUN(object):
     # Import Methods from Files
@@ -106,11 +107,19 @@ class FermiUN(object):
 
         return mask
 
-    # TODO
-    def save_model(self):
-        pass
+    def save_model(self, filepath : str):
+        '''
+        Saves the current model and loss history 
+        :param filepath: Path to the model file
+        '''
+        if filepath[-3:] != ".h5":
+            filepath = filepath + ".h5"
+        self.modelhandler.model.save(filepath)
 
-    # TODO
     def load_model(self, modelpath : str):
-        pass
+        '''
+        Loads a given model.
+        :param modelpath: Filepath to the saved model
+        '''
+        self.modelhandler.model = load_model(modelpath)
     
