@@ -3,12 +3,38 @@
 #f = FermiUN.from_configfile("./ConfigFiles/testconfig.yaml")
 #print(f.config)
 # %%
-from os import listdir
-from os.path import join, isfile, abspath
-folderpath = r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Thermo_Remeasure'
-res = img_list = [join(folderpath, el) for el in listdir(folderpath) \
-        if 'BrightM' in el and isfile(join(folderpath, el))]
-print(res)
+d1 = 64
+d2 = 128
+d3 = 256
+d4 = 512
+d5 = 1024
+b_momentum=0.99
+
+minS = 22 # smallest size of layer at the bottom of the U
+inS = minS
+for i in range(4):
+    inS = (inS+4)*2
+inS = inS+4
+
+upS = [inS-4]
+for i in range(3):
+    s = int(upS[-1]/2-4)
+    upS = np.append(upS,s)
+
+downS = minS
+downS = [int(downS*2)]
+for i in range(3):
+    s = int(downS[-1]-4)*2
+    downS = np.append(downS,s)
+downS = np.flip(downS)
+lastS = downS[0]-6
+crop = (upS-downS)/2
+
+cropL = int((lastS-12*2) / 2)
+cropL1 = int(crop[0])
+cropL2 = int(crop[1])
+cropL3 = int(crop[2])
+cropL4 = int(crop[3])
 # %%
 from FermiUN import FermiUN
 FermiUN.create_config_file("./ConfigFiles/testconfig.yaml")
