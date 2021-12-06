@@ -10,7 +10,7 @@ d4 = 512
 d5 = 1024
 b_momentum=0.99
 
-minS = 22 # smallest size of layer at the bottom of the U
+minS = 20 # smallest size of layer at the bottom of the U
 inS = minS
 for i in range(4):
     inS = (inS+4)*2
