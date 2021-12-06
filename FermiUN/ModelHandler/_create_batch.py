@@ -1,5 +1,6 @@
 import numpy as np
 from skimage.io import imread
+from os.path import join
 
 def mask_image(self, image : np.array) -> tuple[np.array]:
     '''
@@ -28,7 +29,7 @@ def create_batch(self, list_of_files : list[str], list_of_indices : list[int]) -
     Y = np.empty([len(list_of_indices), self.config.radius*2, self.config.radius*2])
 
     for i in range(len(list_of_indices)):
-        img = np.load(list_of_files[i])
+        img = np.load(join(self.config.imagefolder, list_of_files[i]))
         X[i,:,:], Y[i,:,:] = self.mask_image(img)
 
     return X, Y
