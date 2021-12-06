@@ -18,7 +18,7 @@ def define_model(self):
     d5 = 1024
     b_momentum=0.99
 
-    minS = 22 # smallest size of layer at the bottom of the U
+    minS = 21 # smallest size of layer at the bottom of the U
     inS = minS
     for i in range(4):
         inS = (inS+4)*2

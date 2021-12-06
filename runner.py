@@ -33,18 +33,18 @@ folders = [r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Thermo_Remeasu
     r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Scan_Re_99100', \
     r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Scan_Re_109110', \
     r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Scan_Re_Uni']
-    
+
 
 f = FermiUN("./ConfigFiles/testconfig.yaml")
 
 files = os.listdir(f.config.imagefolder)
 for file in files:
-    os.remove(os.join(f.config.imagefolder, file))
+    os.remove(os.path.join(f.config.imagefolder, file))
 
 f.import_images(folders, "BrightM")
 
-#f.initialize_for_training()
-#f.train()
+f.initialize_for_training()
+f.train()
 
 endtime = time.time()
 
