@@ -1,5 +1,5 @@
 import numpy as np
-import tqdm as tqdm
+from tqdm import tqdm
 import gc
 from os.path import join
 from os import remove
