@@ -2,7 +2,7 @@ import numpy as np
 from skimage.io import imread
 from os.path import join
 
-def mask_image(self, image : np.array) -> tuple[np.array]:
+def mask_image(self, image): # np.array -> tuple[np.array]
     '''
     Takes an image and returns it masked as well as the original
     :param image: Input image
@@ -19,7 +19,7 @@ def mask_image(self, image : np.array) -> tuple[np.array]:
     return X, Y
 
 
-def create_batch(self, list_of_files : list[str], list_of_indices : list[int]) -> tuple[np.array, np.array]:
+def create_batch(self, list_of_files, list_of_indices):# list[str], list[int] -> tuple[np.array, np.array]
     '''
     Creates a batch of masked images and associated targets.
     :param list_of_files: is a list of all images in the imagefolder
