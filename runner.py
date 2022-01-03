@@ -46,8 +46,8 @@ for el in directory:
 
 f.import_images(folders, "BrightM")
 
-f.initialize_for_training()
-f.train()
+#f.initialize_for_training()
+#f.train()
 
 endtime = time.time()
 
