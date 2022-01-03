@@ -37,9 +37,12 @@ folders = [r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Thermo_Remeasu
 
 f = FermiUN("./ConfigFiles/testconfig.yaml")
 
-files = os.listdir(f.config.imagefolder)
-for file in files:
-    os.remove(os.path.join(f.config.imagefolder, file))
+directory = os.listdir(f.config.imagefolder)
+for el in directory:
+    if os.path.isdir(el):
+        os.rmdir(os.path.join(f.config.imagefolder, el))
+    else:
+        os.remove(os.path.join(f.config.imagefolder, el))
 
 f.import_images(folders, "BrightM")
 
