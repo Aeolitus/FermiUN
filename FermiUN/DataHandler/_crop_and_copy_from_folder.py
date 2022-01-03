@@ -42,23 +42,29 @@ def crop_and_copy_from_folder(self, folderpath : str, imagename : str):
 
     img_list = [join(folderpath, el) for el in listdir(folderpath) if imagename in el]
 
-    folder_list = [join(target_folder, el) for el in listdir(target_folder) \
-        if isdir(join(target_folder,el)) and "images_" in el]
-    current_folder = join(target_folder, "images_" + str(len(folder_list)))
+    folder_nums = [int(el.removeprefix("images_")) for el in listdir(target_folder) \
+        if isdir(join(target_folder, el)) and "images_" in el]
+    folder_nums.append(0)
+    current_folder = join(target_folder, "images_" + str(max(folder_nums)))
     makedirs(current_folder, exist_ok=True)
-    
-    old_img_number = 10000*len(folder_list)+len(listdir(current_folder))
+    image_nums = [int(el.removesuffix(".npy").removeprefix(self.config.imageprefix)) \
+        for el in listdir(current_folder) if ".npy" in el]
+    if len(image_nums) == 0:
+        old_img_number = max(folder_nums)*10000
+    else:
+        old_img_number = max(image_nums)+1
     img_number = old_img_number
-    
+
     for img in tqdm(img_list):
         try:
             img = self.read_crop_and_cap(img)
 
             if img_number % 10000 == 0:
-                current_folder = join(target_folder, "images_" + str(len(folder_list) + 1))
+                folder_nums.append(int(img_number/10000))
+                current_folder = join(target_folder, "images_" + max(folder_nums))
                 makedirs(current_folder, exist_ok=True)
 
-            target_name = current_folder + '/' + self.config.imageprefix + str(img_number)
+            target_name = join(current_folder, self.config.imageprefix + str(img_number) + ".npy")
             np.save(target_name, img)
             self.config.filelist.append(target_name)
             img_number = img_number + 1
