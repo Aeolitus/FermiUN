@@ -3,7 +3,7 @@ from skimage.io import imread
 from FermiUN.DataHandler._crop_and_copy_from_folder import read_crop_and_cap
 from FermiUN.ModelHandler._create_batch import mask_image
 
-def infer_image(self, imagepath : str) -> tuple[np.array, np.array, np.array]:
+def infer_image(self, imagepath : str): #  -> tuple[np.array, np.array, np.array]
     '''
     Given a path to an image, evaluate the model on it
     :param imagepath: Path to the image file
