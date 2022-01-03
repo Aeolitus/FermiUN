@@ -4,11 +4,9 @@ from os.path import basename
 
 def make_train_validation_test_split(self):
     '''
-    Splits the files in the imagefolder into the three categories.
+    Splits the files in the imagefolders into the three categories.
     '''
-    # Filter out other files that might be in the folder, but arent data
-    imagefolder_contents = [el for el in listdir(self.config.imagefolder) \
-        if self.config.imageprefix in basename(el) and '.npy' in basename(el)]
+    imagefolder_contents = self.config.filelist
 
     indices = np.arange(len(imagefolder_contents))
     np.random.shuffle(indices)

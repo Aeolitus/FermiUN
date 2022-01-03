@@ -21,6 +21,7 @@ def create_config_file(cls, path : str):
     conf.batch_size = 8
     conf.learning_rate = 5e-6
     conf.max_epochs = 1000
+    conf.filelist = []
 
     with open(path, "w") as conf_file:
         conf_file.write(conf.toYAML())

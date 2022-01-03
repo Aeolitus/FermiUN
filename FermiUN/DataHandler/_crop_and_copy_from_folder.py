@@ -1,5 +1,5 @@
-from os import listdir, mkdir
-from os.path import join, exists
+from os import listdir, mkdir, makedirs
+from os.path import join, exists, isdir
 import numpy as np
 from skimage.io import imread
 from tqdm import tqdm
@@ -38,19 +38,31 @@ def crop_and_copy_from_folder(self, folderpath : str, imagename : str):
         raise Exception("Source imagefolder does not exist.")
 
     target_folder = self.config.imagefolder
-    if not exists(target_folder):
-        mkdir(target_folder)
+    makedirs(target_folder, exist_ok=True)
 
     img_list = [join(folderpath, el) for el in listdir(folderpath) if imagename in el]
-    old_img_number = len(listdir(target_folder))
-    img_number = old_img_number
 
+    folder_list = [join(target_folder, el) for el in listdir(target_folder) \
+        if isdir(join(target_folder,el)) and "images_" in el]
+    current_folder = join(target_folder, "images_" + str(len(folder_list)))
+    makedirs(current_folder, exist_ok=True)
+    
+    old_img_number = 10000*len(folder_list)+len(listdir(current_folder))
+    img_number = old_img_number
+    
     for img in tqdm(img_list):
         try:
             img = self.read_crop_and_cap(img)
-            target_name = target_folder + '/' + self.config.imageprefix + str(img_number)
+
+            if img_number % 10000 == 0:
+                current_folder = join(target_folder, "images_" + str(len(folder_list) + 1))
+                makedirs(current_folder, exist_ok=True)
+
+            target_name = current_folder + '/' + self.config.imageprefix + str(img_number)
             np.save(target_name, img)
+            self.config.filelist.append(target_name)
             img_number = img_number + 1
+
         except Exception: 
             pass
     
