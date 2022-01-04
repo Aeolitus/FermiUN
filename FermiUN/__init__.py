@@ -92,6 +92,7 @@ class FermiUN(object):
                 print(f"Loading folder {i} out of {totalnum}...")
                 self.datahandler.crop_and_copy_from_folder(path, imagename)
                 i = i + 1
+        self.save_config_file()
 
     def generate_mask(self) -> np.array:
         '''

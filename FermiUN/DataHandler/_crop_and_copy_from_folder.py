@@ -56,14 +56,13 @@ def crop_and_copy_from_folder(self, folderpath : str, imagename : str):
     img_number = old_img_number
 
     for img in tqdm(img_list):
-        try:
-            img = self.read_crop_and_cap(img)
-
-            if img_number % 10000 == 0:
-                folder_nums.append(int(img_number/10000))
-                current_folder = join(target_folder, "images_" + max(folder_nums))
+        if img_number >= (max(folder_nums)+1)*10000:
+                folder_nums.append(max(folder_nums)+1)
+                current_folder = join(target_folder, "images_" + str(max(folder_nums)))
                 makedirs(current_folder, exist_ok=True)
 
+        try:
+            img = self.read_crop_and_cap(img)
             target_name = join(current_folder, self.config.imageprefix + str(img_number) + ".npy")
             np.save(target_name, img)
             self.config.filelist.append(target_name)

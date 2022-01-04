@@ -1,6 +1,7 @@
 from FermiUN import FermiUN
 import os
 import time
+import shutil
 
 starttime = time.time()
 
@@ -37,12 +38,9 @@ folders = [r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Thermo_Remeasu
 
 f = FermiUN("./ConfigFiles/testconfig.yaml")
 
-directory = os.listdir(f.config.imagefolder)
-for el in directory:
-    if os.path.isdir(el):
-        os.rmdir(os.path.join(f.config.imagefolder, el))
-    else:
-        os.remove(os.path.join(f.config.imagefolder, el))
+if os.path.isdir(f.config.imagefolder):
+    shutil.rmtree(f.config.imagefolder)
+os.makedirs(f.config.imagefolder, exist_ok=True)
 
 f.import_images(folders, "BrightM")
 
