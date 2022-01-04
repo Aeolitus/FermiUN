@@ -35,7 +35,7 @@ folders = [r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Thermo_Remeasu
     r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Scan_Re_109110', \
     r'Y:\Archiv\2D\Experiment\2021\20210202\Images20210202\Scan_Re_Uni']
 
-folders = [el.replace("\\", "/").replace("Y:", "/afs/physnet.uni-hamburg.de/groups/group-las_m") for el in folders]
+#folders = [el.replace("\\", "/").replace("Y:", "/afs/physnet.uni-hamburg.de/groups/group-las_m") for el in folders]
 
 f = FermiUN("./ConfigFiles/testconfig.yaml")
 
