@@ -3,7 +3,7 @@ image:
     center_x: 288
     center_y: 249
     width: 444 # Larger window, contains full data plus a good amount
-imagefolder: \\afs\physnet.uni-hamburg.de\users\las_m\lsobirey\FermiUNData
+imagefolder: /fastscratch/lsobirey/FermiUNData
 imageprefix: bright_
 learning_rate: 5.0e-06
 max_epochs: 1000
