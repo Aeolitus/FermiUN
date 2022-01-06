@@ -57,9 +57,9 @@ def crop_and_copy_from_folder(self, folderpath : str, imagename : str):
 
     for img in tqdm(img_list):
         if img_number >= (max(folder_nums)+1)*10000:
-                folder_nums.append(max(folder_nums)+1)
-                current_folder = join(target_folder, "images_" + str(max(folder_nums)))
-                makedirs(current_folder, exist_ok=True)
+            folder_nums.append(max(folder_nums)+1)
+            current_folder = join(target_folder, "images_" + str(max(folder_nums)))
+            makedirs(current_folder, exist_ok=True)
 
         try:
             img = self.read_crop_and_cap(img)
@@ -69,6 +69,6 @@ def crop_and_copy_from_folder(self, folderpath : str, imagename : str):
             img_number = img_number + 1
 
         except Exception: 
-            pass
+            print(f"There was an exception caught for image number {img_number}, skipped.")
     
     print(f"{img_number-old_img_number} images were imported, for a total of {img_number}.")
