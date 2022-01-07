@@ -3,6 +3,7 @@ from FermiUN.ModelHandler import ModelHandler
 from FermiUN.DataHandler import DataHandler
 import yaml 
 import numpy as np
+import tensorflow
 from tensorflow.keras.models import load_model
 from os.path import join
 
@@ -17,6 +18,9 @@ class FermiUN(object):
         self.mask = self.generate_mask()
         self.modelhandler = ModelHandler(self.config, self.mask)
         self.datahandler = DataHandler(self.config, self.mask)
+
+        physical_devices = tensorflow.config.list_physical_devices('GPU')
+        tensorflow.config.experimental.set_memory_growth(physical_devices[0], True)
 
     @classmethod
     def from_saved_model(cls, modelpath : str, configpath : str):
