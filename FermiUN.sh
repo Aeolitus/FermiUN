@@ -46,6 +46,7 @@
 
 export OMP_NUM_THREADS=4
 export TF_XLA_FLAGS=--tf_xla_enable_xla_devices
+export HDF5_USE_FILE_LOCKING=FALSE
 module load cuda/11.1.105
 module load cudnn/8.0.5-cuda11.1
 module load anaconda3/2021.05 
